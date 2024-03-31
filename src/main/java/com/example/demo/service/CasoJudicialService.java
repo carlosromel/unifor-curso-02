@@ -18,7 +18,9 @@
 package com.example.demo.service;
 
 import com.example.demo.component.CasoJudicial;
+import com.example.demo.repository.CasoJudicialRepository;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +39,25 @@ public class CasoJudicialService {
     
     public List<CasoJudicial> getTodosOsCasos() {
         return repository.findAll();
+    }
+
+    public boolean existe(CasoJudicial novoCaso) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public CasoJudicial criarCaso(CasoJudicial novoCaso) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public CasoJudicial atualizarCaso(Long id, CasoJudicial casoAtualizado) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public CasoJudicial deletarCaso(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public CasoJudicial atualizarCaso(Long id, Map<String, Object> atualizacoes) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
