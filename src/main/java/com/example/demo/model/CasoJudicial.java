@@ -15,32 +15,38 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.example.demo;
+package com.example.demo.model;
 
-import com.example.demo.component.CasoJudicial;
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.util.Date;
 
 /**
  *
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
-@EnableRabbit
-@SpringBootApplication
-public class ProjetoApplication implements CommandLineRunner {
+@Entity
+@Table(name = "tb_caso_judicial")
+public class CasoJudicial {
 
-    @Autowired
-    private CasoJudicial caso;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_caso_judicial")
+    private long id;
 
-    public static void main(String[] args) {
-        SpringApplication.run(ProjetoApplication.class, args);
-    }
+    @Column(name = "nr_numero", nullable = false)
+    private long numero;
 
-    @Override
-    public void run(String... args) throws Exception {
-        caso.finalizarCusto(100, "GO", 2017);
-    }
+    @Column(name = "cd_decisao", nullable = false)
+    private char decisao;
+
+    @Column(name = "ds_deccricao", nullable = false)
+    private String descricao;
+
+    @Column(name = "dt_data_abertura", nullable = false)
+    private Date dataAbertura;
 }

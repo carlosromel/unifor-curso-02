@@ -15,32 +15,29 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.example.demo;
+package com.example.demo.controller;
 
-import com.example.demo.component.CasoJudicial;
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import ch.lihsmi.rabbitproducer.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
-@EnableRabbit
-@SpringBootApplication
-public class ProjetoApplication implements CommandLineRunner {
+@RestController
+@RequestMapping("/fila")
+public class FilaController {
 
     @Autowired
-    private CasoJudicial caso;
+    private Producer producer;
 
-    public static void main(String[] args) {
-        SpringApplication.run(ProjetoApplication.class, args);
-    }
+    @GetMapping
+    public String send() throws Exception {
+        producer.send("ENVIANDO ISSO!");
 
-    @Override
-    public void run(String... args) throws Exception {
-        caso.finalizarCusto(100, "GO", 2017);
+        return "Enviado";
     }
 }

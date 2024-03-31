@@ -15,32 +15,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.example.demo;
+package com.example.demo.mapper;
 
 import com.example.demo.component.CasoJudicial;
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.example.demo.dto.CasoJudicialDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 /**
  *
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
-@EnableRabbit
-@SpringBootApplication
-public class ProjetoApplication implements CommandLineRunner {
+@Mapper
+public interface CasoJudicialMapper {
 
-    @Autowired
-    private CasoJudicial caso;
+    CasoJudicialMapper INSTANCE = Mappers.getMapper(CasoJudicialMapper.class);
 
-    public static void main(String[] args) {
-        SpringApplication.run(ProjetoApplication.class, args);
-    }
+    @Mapping(source = "numero", target = "numero")
+    @Mapping(source = "decisao", target = "decisao")
+    @Mapping(source = "descricao", target = "descricao")
+    CasoJudicialDTO casoJudicialToDTO(CasoJudicial casoJudicial);
 
-    @Override
-    public void run(String... args) throws Exception {
-        caso.finalizarCusto(100, "GO", 2017);
-    }
+    @Mapping(source = "numero", target = "numero")
+    @Mapping(source = "decisao", target = "decisao")
+    @Mapping(source = "descricao", target = "descricao")
+    CasoJudicial dtoToCasoJudicial(CasoJudicialDTO casoJudicialDTO);
 }

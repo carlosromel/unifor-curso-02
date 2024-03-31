@@ -15,32 +15,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.example.demo;
+package com.example.demo.config;
 
-import com.example.demo.component.CasoJudicial;
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.amqp.core.Queue;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  *
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
-@EnableRabbit
-@SpringBootApplication
-public class ProjetoApplication implements CommandLineRunner {
+@Configuration
+public class ProducerConfig {
 
-    @Autowired
-    private CasoJudicial caso;
+    @Value(QueueConfig.NOME_FILA)
+    private String message;
 
-    public static void main(String[] args) {
-        SpringApplication.run(ProjetoApplication.class, args);
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-        caso.finalizarCusto(100, "GO", 2017);
+    @Bean
+    public Queue procuderQueue() {
+        return new Queue(message, true);
     }
 }
