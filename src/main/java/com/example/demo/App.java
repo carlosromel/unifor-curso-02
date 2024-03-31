@@ -15,21 +15,19 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
-/**
- *
- * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
- */
 package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ *
+ * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
+ */
 @SpringBootApplication
-public class DemoApplication {
+public class App {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(App.class, args);
+    }
 }
