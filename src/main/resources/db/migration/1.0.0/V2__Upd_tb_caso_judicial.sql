@@ -5,6 +5,9 @@ alter table curso2.tb_caso_judicial
     alter column nr_numero_unico type varchar(25);
 
 alter table curso2.tb_caso_judicial
+    add constraint nr_numero_unico_unik unique(nr_numero_unico);
+
+alter table curso2.tb_caso_judicial
     add constraint cd_decisao_check check (cd_decisao in ('A' -- Ativo
                                                         , 'I' -- Inativo
                                                         , 'C' -- Concluído
