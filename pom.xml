@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>spring-boot</artifactId>
+    <artifactId>curso2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <parent>
@@ -21,7 +21,7 @@
         <exec.mainClass>com.example.demo.curso1.ProjetoApplication</exec.mainClass>
     </properties>
 
-    <name>spring-boot</name>
+    <name>curso-02</name>
     <url>https://github.com/carlosromel/unifor-curso-02/</url>
     <description>Demo project for Spring Boot</description>
 
@@ -81,7 +81,6 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>1.4.2.Final</version>
-            <type>jar</type>
         </dependency>
     </dependencies>
 
@@ -94,7 +93,6 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>9.8.1</version>
                 <configuration>
                     <configFiles>conf/flyway.conf</configFiles>
                     <!--
