@@ -3,7 +3,7 @@
  *
  * https://github.com/michaellihs/spring-rabbitmq/blob/master/src/main/java/ch/lihsmi/GlobalConfig.java
  */
-package ch.lihsmi;
+package com.example.demo.config;
 
 public class GlobalConfig {
 

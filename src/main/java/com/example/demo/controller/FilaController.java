@@ -17,7 +17,7 @@
  */
 package com.example.demo.controller;
 
-import ch.lihsmi.rabbitproducer.Producer;
+import com.example.demo.rabbitproducer.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

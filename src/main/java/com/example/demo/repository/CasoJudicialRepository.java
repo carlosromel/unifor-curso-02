@@ -17,7 +17,7 @@
  */
 package com.example.demo.repository;
 
-import com.example.demo.component.CasoJudicial;
+import com.example.demo.model.CasoJudicial;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -25,6 +25,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
 public interface CasoJudicialRepository extends JpaRepository<CasoJudicial, Long> {
-
-    CasoJudicial findByNumero(String numero);
 }

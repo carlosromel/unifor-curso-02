@@ -17,7 +17,7 @@
  */
 package com.example.demo;
 
-import com.example.demo.component.CasoJudicial;
+import com.example.demo.component.CasoJudicialComponent;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -33,7 +33,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ProjetoApplication implements CommandLineRunner {
 
     @Autowired
-    private CasoJudicial caso;
+    private CasoJudicialComponent caso;
 
     public static void main(String[] args) {
         SpringApplication.run(ProjetoApplication.class, args);
@@ -41,6 +41,7 @@ public class ProjetoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        System.out.println("Teste2");
         caso.finalizarCusto(100, "GO", 2017);
     }
 }

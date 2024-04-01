@@ -17,7 +17,7 @@
  */
 package com.example.demo.mapper;
 
-import com.example.demo.component.CasoJudicial;
+import com.example.demo.component.CasoJudicialComponent;
 import com.example.demo.dto.CasoJudicialDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -35,10 +35,10 @@ public interface CasoJudicialMapper {
     @Mapping(source = "numero", target = "numero")
     @Mapping(source = "decisao", target = "decisao")
     @Mapping(source = "descricao", target = "descricao")
-    CasoJudicialDTO casoJudicialToDTO(CasoJudicial casoJudicial);
+    CasoJudicialDTO casoJudicialToDTO(CasoJudicialComponent casoJudicial);
 
     @Mapping(source = "numero", target = "numero")
     @Mapping(source = "decisao", target = "decisao")
     @Mapping(source = "descricao", target = "descricao")
-    CasoJudicial dtoToCasoJudicial(CasoJudicialDTO casoJudicialDTO);
+    CasoJudicialComponent dtoToCasoJudicial(CasoJudicialDTO casoJudicialDTO);
 }

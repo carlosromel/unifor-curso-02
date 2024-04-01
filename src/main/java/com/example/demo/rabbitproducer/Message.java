@@ -3,7 +3,7 @@
  *
  * https://github.com/michaellihs/spring-rabbitmq/blob/master/src/main/java/ch/lihsmi/rabbitproducer/Message.java
  */
-package ch.lihsmi.rabbitproducer;
+package com.example.demo.rabbitproducer;
 
 public class Message {
 

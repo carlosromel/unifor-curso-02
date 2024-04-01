@@ -17,8 +17,9 @@
  */
 package com.example.demo.controller;
 
-import com.example.demo.component.CasoJudicial;
+import com.example.demo.component.CasoJudicialComponent;
 import com.example.demo.exception.CasoDuplicadoException;
+import com.example.demo.model.CasoJudicial;
 import com.example.demo.service.CasoJudicialService;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/casos")
 public class CasoJudicialController {
 
+    @Autowired
     private final CasoJudicialService service;
 
     @Autowired
@@ -58,35 +60,35 @@ public class CasoJudicialController {
     }
 
     @PostMapping
-    public ResponseEntity<CasoJudicial> criarCaso(@RequestBody CasoJudicial novoCaso) throws CasoDuplicadoException {
+    public ResponseEntity<CasoJudicialComponent> criarCaso(@RequestBody CasoJudicialComponent novoCaso) throws CasoDuplicadoException {
         if (service.existe(novoCaso)) {
             throw new CasoDuplicadoException("Caso duplicado");
         } else {
-            CasoJudicial caso = service.criarCaso(novoCaso);
+            CasoJudicialComponent caso = service.criarCaso(novoCaso);
 
             return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(caso);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CasoJudicial> atualizarCaso(@PathVariable Long id,
-            @RequestBody CasoJudicial casoAtualizado) {
-        CasoJudicial caso = service.atualizarCaso(id, casoAtualizado);
+    public ResponseEntity<CasoJudicialComponent> atualizarCaso(@PathVariable Long id,
+            @RequestBody CasoJudicialComponent casoAtualizado) {
+        CasoJudicialComponent caso = service.atualizarCaso(id, casoAtualizado);
 
         return ResponseEntity.ok(caso);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<CasoJudicial> ajustarCaso(@PathVariable Long id,
+    public ResponseEntity<CasoJudicialComponent> ajustarCaso(@PathVariable Long id,
             @RequestBody Map<String, Object> atualizacoes) {
-        CasoJudicial caso = service.atualizarCaso(id, atualizacoes);
+        CasoJudicialComponent caso = service.atualizarCaso(id, atualizacoes);
 
         return ResponseEntity.ok(caso);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CasoJudicial> deletarCaso(@PathVariable Long id) {
-        CasoJudicial caso = service.deletarCaso(id);
+    public ResponseEntity<CasoJudicialComponent> deletarCaso(@PathVariable Long id) {
+        CasoJudicialComponent caso = service.deletarCaso(id);
 
         return ResponseEntity.noContent().build();
     }

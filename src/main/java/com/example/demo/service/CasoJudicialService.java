@@ -17,7 +17,8 @@
  */
 package com.example.demo.service;
 
-import com.example.demo.component.CasoJudicial;
+import com.example.demo.component.CasoJudicialComponent;
+import com.example.demo.model.CasoJudicial;
 import com.example.demo.repository.CasoJudicialRepository;
 import java.util.List;
 import java.util.Map;
@@ -41,23 +42,23 @@ public class CasoJudicialService {
         return repository.findAll();
     }
 
-    public boolean existe(CasoJudicial novoCaso) {
+    public boolean existe(CasoJudicialComponent novoCaso) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public CasoJudicial criarCaso(CasoJudicial novoCaso) {
+    public CasoJudicialComponent criarCaso(CasoJudicialComponent novoCaso) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public CasoJudicial atualizarCaso(Long id, CasoJudicial casoAtualizado) {
+    public CasoJudicialComponent atualizarCaso(Long id, CasoJudicialComponent casoAtualizado) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public CasoJudicial deletarCaso(Long id) {
+    public CasoJudicialComponent deletarCaso(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public CasoJudicial atualizarCaso(Long id, Map<String, Object> atualizacoes) {
+    public CasoJudicialComponent atualizarCaso(Long id, Map<String, Object> atualizacoes) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

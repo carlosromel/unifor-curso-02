@@ -17,11 +17,14 @@
  */
 package com.example.demo.component;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
-public class CustoJudicial {
+@Component
+public class CustoJudicialComponent {
     
     public double adicionarCusto(int anoJulgamento) {
         return 0;

@@ -3,9 +3,9 @@
  *
  * https://github.com/michaellihs/spring-rabbitmq/blob/master/src/main/java/ch/lihsmi/rabbitproducer/Producer.java
  */
-package ch.lihsmi.rabbitproducer;
+package com.example.demo.rabbitproducer;
 
-import ch.lihsmi.GlobalConfig;
+import com.example.demo.config.GlobalConfig;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,5 +28,4 @@ public class Producer {
                 message.getMessageType(),
                 message.getMessageBody());
     }
-
 }

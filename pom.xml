@@ -18,7 +18,24 @@
     </properties>
 
     <name>spring-boot</name>
+    <url>https://github.com/carlosromel/unifor-curso-02/</url>
     <description>Demo project for Spring Boot</description>
+
+    <contributors>
+        <contributor>
+            <name>Carlos Romel Pereira da Silva</name>
+            <email>carlos.romel@gmail.com</email>
+            <url>https://github.com/carlosromel</url>
+            <timezone>GMT-3</timezone>
+        </contributor>
+    </contributors>
+
+    <scm>
+        <connection>scm:git:https://github.com/carlosromel/unifor-curso-02.git</connection>
+        <developerConnection>scm:git:https://github.com/carlosromel/unifor-curso-02.git</developerConnection>
+        <url>https://github.com/carlosromel/unifor-curso-02.git</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <dependencies>
         <dependency>
@@ -69,6 +86,20 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>9.8.1</version>
+                <configuration>
+                    <configFiles>conf/flyway.conf</configFiles>
+                    <!--
+                    <driver>org.postgresql.Driver</driver>
+                    <url>jdbc:postgresql://127.0.0.1/flyway_mania</url>
+                    <user>flyway</user>
+                    <password>flywaymaster</password>
+                    -->
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -17,6 +17,7 @@
  */
 package com.example.demo.component;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -24,8 +25,22 @@ import org.springframework.stereotype.Component;
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
 @Component
-public class TaxaJudicial {
-    public double adicionarTaxa(String estado) {
-        return 0;
+public class CasoJudicialComponent {
+
+    @Autowired
+    private CustoJudicialComponent custoJudicial;
+    @Autowired
+    private TaxaJudicialComponent taxaJudicial;
+
+    public CasoJudicialComponent(CustoJudicialComponent custoJudicial, TaxaJudicialComponent taxaJudicial) {
+        this.custoJudicial = custoJudicial;
+        this.taxaJudicial = taxaJudicial;
+    }
+
+    public double finalizarCusto(double custo, String estado, int anoJulgamento) {
+        custo += custoJudicial.adicionarCusto(anoJulgamento);
+        custo += taxaJudicial.adicionarTaxa(estado);
+
+        return custo;
     }
 }

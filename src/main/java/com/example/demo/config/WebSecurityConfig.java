@@ -53,4 +53,9 @@ public class WebSecurityConfig {
                 .anyRequest().authenticated()).httpBasic(Customizer.withDefaults())
                 .build();
     }
+
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 }

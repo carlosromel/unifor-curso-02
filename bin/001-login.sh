@@ -1,12 +1,11 @@
 #!/bin/bash
 
-URL="http://localhost:8081/realms/SpringBootKeycloak/protocol/openid-connect/token"
+URL="http://localhost:8081/api/casos/"
+#URL="http://localhost:8081/api/arquivos/"
+#URL="http://localhost:8081/"
 
-curl --silent \
+curl --verbose \
      --request POST \
-     --data  "client_id=projeto" \
-     --data   "username=romel" \
-     --data   "password=aidemim" \
-     --data "grant_type=password" \
-     ${URL} | jq
+     --user    "romel:123" \
+     ${URL} #| jq
 

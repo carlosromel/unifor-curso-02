@@ -30,7 +30,7 @@ import java.util.Date;
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
 @Entity
-@Table(name = "tb_caso_judicial")
+@Table(schema = "curso2", name = "tb_caso_judicial")
 public class CasoJudicial {
 
     @Id
@@ -38,8 +38,8 @@ public class CasoJudicial {
     @Column(name = "id_caso_judicial")
     private long id;
 
-    @Column(name = "nr_numero", nullable = false)
-    private long numero;
+    @Column(name = "nr_numero_unico", nullable = false)
+    private long numeroUnico;
 
     @Column(name = "cd_decisao", nullable = false)
     private char decisao;
