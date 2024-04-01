@@ -53,6 +53,14 @@ public class CasoJudicialController {
     }
 
     @GetMapping
+    @RequestMapping("/{numeroUnico}")
+    public ResponseEntity<CasoJudicial> getCasoJudicial(@PathVariable("numeroUnico") String numeroUnico) {
+        CasoJudicial caso = this.service.getCasoByNumeroUnico(numeroUnico);
+
+        return ResponseEntity.ok(caso);
+    }
+
+    @GetMapping
     public ResponseEntity<List<CasoJudicial>> getTodosOsCasos() {
         List<CasoJudicial> casos = service.getTodosOsCasos();
 

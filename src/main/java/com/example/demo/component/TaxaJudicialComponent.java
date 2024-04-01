@@ -25,7 +25,18 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class TaxaJudicialComponent {
+
+    private double taxa;
+
+    public TaxaJudicialComponent() {
+        this.taxa = 1024;
+    }
+
     public double adicionarTaxa(String estado) {
-        return 0;
+        return this.taxa;
+    }
+
+    public double getTaxa() {
+        return this.taxa;
     }
 }

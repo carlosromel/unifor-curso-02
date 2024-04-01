@@ -17,6 +17,7 @@
  */
 package com.example.demo.component;
 
+import java.time.LocalDate;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,8 +26,26 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CustoJudicialComponent {
-    
+
+    private double custo;
+    private int anoJulgamento;
+
+    public CustoJudicialComponent() {
+        this.custo = 0;
+        this.anoJulgamento = 0;
+    }
+
     public double adicionarCusto(int anoJulgamento) {
-        return 0;
+        this.anoJulgamento = anoJulgamento;
+        int idade = LocalDate.now().getYear() - anoJulgamento;
+        return this.custo + (idade * 1.1);
+    }
+
+    public double getCusto() {
+        return this.custo;
+    }
+
+    public int getAnoJulgamento() {
+        return this.anoJulgamento;
     }
 }

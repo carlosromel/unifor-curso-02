@@ -19,7 +19,7 @@ package com.example.demo.service;
 
 import com.example.demo.component.CasoJudicialComponent;
 import com.example.demo.model.CasoJudicial;
-import com.example.demo.repository.CasoJudicialRepository;
+import com.example.demo.repository.ICasoJudicialRepository;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +31,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CasoJudicialService {
-    private final CasoJudicialRepository repository;
+    private final ICasoJudicialRepository repository;
     
     @Autowired
-    public CasoJudicialService(CasoJudicialRepository repository) {
+    public CasoJudicialService(ICasoJudicialRepository repository) {
         this.repository = repository;
     }
     
@@ -60,5 +60,11 @@ public class CasoJudicialService {
 
     public CasoJudicialComponent atualizarCaso(Long id, Map<String, Object> atualizacoes) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public CasoJudicial getCasoByNumeroUnico(String numeroUnico) {
+        final List<CasoJudicial> resultado = this.repository.findByNumeroUnico(numeroUnico);
+
+        return resultado.isEmpty() ? new CasoJudicial() : resultado.get(0);
     }
 }

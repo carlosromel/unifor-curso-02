@@ -43,4 +43,13 @@ public class CasoJudicialComponent {
 
         return custo;
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append(String.format("Ano.: [%4d]%n", custoJudicial.getAnoJulgamento()))
+                .append(String.format("Caso: [%7.2f]%n", custoJudicial.getCusto()))
+                .append(String.format("Taxa: [%7.2f]%n", taxaJudicial.getTaxa()))
+                .toString();
+    }
 }

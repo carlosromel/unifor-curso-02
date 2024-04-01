@@ -16,8 +16,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.release>17</maven.compiler.release>
         <exec.mainClass>com.example.demo.curso1.ProjetoApplication</exec.mainClass>
     </properties>
 
@@ -95,12 +94,6 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <configuration>
                     <configFiles>conf/flyway.conf</configFiles>
-                    <!--
-                    <driver>org.postgresql.Driver</driver>
-                    <url>jdbc:postgresql://127.0.0.1/flyway_mania</url>
-                    <user>flyway</user>
-                    <password>flywaymaster</password>
-                    -->
                 </configuration>
             </plugin>
         </plugins>

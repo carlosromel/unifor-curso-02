@@ -18,11 +18,17 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.CasoJudicial;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
-public interface CasoJudicialRepository extends JpaRepository<CasoJudicial, Long> {
+public interface ICasoJudicialRepository extends JpaRepository<CasoJudicial, Long> {
+
+    @Query("select c from CasoJudicial c where c.numeroUnico = :numeroUnico")
+    public List<CasoJudicial> findByNumeroUnico(@Param("numeroUnico") String numeroUnico);
 }

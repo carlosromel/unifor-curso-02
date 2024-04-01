@@ -23,7 +23,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 /**
  *
@@ -36,17 +38,33 @@ public class CasoJudicial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_caso_judicial")
-    private long id;
+    private Long id;
 
     @Column(name = "nr_numero_unico", nullable = false)
-    private long numeroUnico;
+    private String numeroUnico;
 
     @Column(name = "cd_decisao", nullable = false)
-    private char decisao;
+    private String decisao;
 
-    @Column(name = "ds_deccricao", nullable = false)
+    @Column(name = "ds_descricao", nullable = false)
     private String descricao;
 
-    @Column(name = "dt_data_abertura", nullable = false)
-    private Date dataAbertura;
+    @Column(name = "dt_abertura", nullable = false)
+    private Timestamp dataAbertura;
+
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String data = Objects.isNull(this.dataAbertura)
+                ? null
+                : sdf.format(dataAbertura.getTime());
+        return new StringBuilder()
+                .append(String.format("%7d: %s - %1s - %s - %s",
+                        id,
+                        numeroUnico,
+                        decisao,
+                        data,
+                        descricao))
+                .toString();
+    }
 }
