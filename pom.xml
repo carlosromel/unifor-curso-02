@@ -14,7 +14,11 @@
     </parent>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <exec.mainClass>com.example.demo.curso1.ProjetoApplication</exec.mainClass>
     </properties>
 
     <name>spring-boot</name>
@@ -26,7 +30,7 @@
             <name>Carlos Romel Pereira da Silva</name>
             <email>carlos.romel@gmail.com</email>
             <url>https://github.com/carlosromel</url>
-            <timezone>GMT-3</timezone>
+            <timezone>-3</timezone>
         </contributor>
     </contributors>
 
