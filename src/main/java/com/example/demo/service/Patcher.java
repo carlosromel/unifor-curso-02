@@ -15,20 +15,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.example.demo.repository;
+package com.example.demo.service;
 
 import com.example.demo.model.CasoJudicial;
-import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import java.lang.reflect.Field;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
-public interface ICasoJudicialRepository extends JpaRepository<CasoJudicial, Long> {
+@Component
+public class Patcher {
 
-    @Query("select c from CasoJudicial c where c.numeroUnico = :numeroUnico")
-    public Optional<CasoJudicial> findByNumeroUnico(@Param("numeroUnico") String numeroUnico);
+    public static void patch(CasoJudicial atual, CasoJudicial parcial) throws IllegalAccessException {
+
+        Class<?> caso = CasoJudicial.class;
+        Field[] campos = caso.getDeclaredFields();
+
+        for (Field campo : campos) {
+            campo.setAccessible(true);
+
+            Object valor = campo.get(parcial);
+
+            if (valor != null) {
+                campo.set(atual, valor);
+            }
+
+            campo.setAccessible(false);
+        }
+    }
 }

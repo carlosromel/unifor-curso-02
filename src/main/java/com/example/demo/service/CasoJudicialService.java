@@ -17,11 +17,10 @@
  */
 package com.example.demo.service;
 
-import com.example.demo.component.CasoJudicialComponent;
 import com.example.demo.model.CasoJudicial;
 import com.example.demo.repository.ICasoJudicialRepository;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,40 +30,88 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CasoJudicialService {
+
     private final ICasoJudicialRepository repository;
-    
+
+    @Autowired
+    private Patcher patcher;
+
     @Autowired
     public CasoJudicialService(ICasoJudicialRepository repository) {
         this.repository = repository;
     }
-    
+
+    public Optional<CasoJudicial> findById(Long id) {
+        return this.repository.findById(id);
+    }
+
     public List<CasoJudicial> getTodosOsCasos() {
-        return repository.findAll();
+        return this.repository.findAll();
     }
 
-    public boolean existe(CasoJudicialComponent novoCaso) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean existe(CasoJudicial novoCaso) {
+        Optional<CasoJudicial> casos = this.repository.findByNumeroUnico(novoCaso.getNumeroUnico());
+
+        return !casos.isEmpty();
     }
 
-    public CasoJudicialComponent criarCaso(CasoJudicialComponent novoCaso) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    /**
+     * Tratamento do verbo POST.
+     *
+     * @param novoCaso
+     * @return
+     */
+    public CasoJudicial criarCaso(CasoJudicial novoCaso) {
+
+        return this.repository.save(novoCaso);
     }
 
-    public CasoJudicialComponent atualizarCaso(Long id, CasoJudicialComponent casoAtualizado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    /**
+     * Tratamento do método GET.
+     *
+     * @param numeroUnico
+     * @return
+     */
+    public Optional<CasoJudicial> getCasoByNumeroUnico(String numeroUnico) {
+        return this.repository.findByNumeroUnico(numeroUnico);
     }
 
-    public CasoJudicialComponent deletarCaso(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    /**
+     * Tratamento do método PATCH.
+     *
+     * @param id
+     * @param atualizacoes
+     * @return
+     */
+    public Optional<CasoJudicial> atualizarCaso(Long id, CasoJudicial atualizacoes) {
+        CasoJudicial atual = findById(id).get();
+
+        try {
+            Patcher.patch(atual, atualizacoes);
+            this.repository.saveAndFlush(atual);
+        } catch (IllegalAccessException e) {
+        }
+
+        return this.repository.findById(id);
     }
 
-    public CasoJudicialComponent atualizarCaso(Long id, Map<String, Object> atualizacoes) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    /**
+     * Tratamento do verbo PUT.
+     *
+     * @param id
+     * @param casoAtualizado
+     * @return
+     */
+    public CasoJudicial substituirCaso(Long id, CasoJudicial casoAtualizado) {
+        return this.repository.saveAndFlush(casoAtualizado);
     }
 
-    public CasoJudicial getCasoByNumeroUnico(String numeroUnico) {
-        final List<CasoJudicial> resultado = this.repository.findByNumeroUnico(numeroUnico);
-
-        return resultado.isEmpty() ? new CasoJudicial() : resultado.get(0);
+    /**
+     * Tratament do verbo DELETE.
+     *
+     * @param id
+     */
+    public void deletarCaso(Long id) {
+        this.repository.deleteById(id);
     }
 }

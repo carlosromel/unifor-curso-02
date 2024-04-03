@@ -17,23 +17,19 @@
  */
 package com.example.demo.controller;
 
-import com.example.demo.component.CasoJudicialComponent;
 import com.example.demo.exception.CasoDuplicadoException;
 import com.example.demo.model.CasoJudicial;
 import com.example.demo.service.CasoJudicialService;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -52,51 +48,86 @@ public class CasoJudicialController {
         this.service = service;
     }
 
-    @GetMapping
-    @RequestMapping("/{numeroUnico}")
-    public ResponseEntity<CasoJudicial> getCasoJudicial(@PathVariable("numeroUnico") String numeroUnico) {
-        CasoJudicial caso = this.service.getCasoByNumeroUnico(numeroUnico);
+    @RequestMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            method = RequestMethod.GET,
+            path = "/{numeroUnico:[\\d.-]{25}}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Optional<CasoJudicial>> getCasoJudicial(@PathVariable("numeroUnico") String numeroUnico) {
+        Optional<CasoJudicial> caso = this.service.getCasoByNumeroUnico(numeroUnico);
 
         return ResponseEntity.ok(caso);
     }
 
-    @GetMapping
+    @RequestMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            method = RequestMethod.GET,
+            path = "/",
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CasoJudicial>> getTodosOsCasos() {
         List<CasoJudicial> casos = service.getTodosOsCasos();
 
         return ResponseEntity.ok(casos);
     }
 
-    @PostMapping
-    public ResponseEntity<CasoJudicialComponent> criarCaso(@RequestBody CasoJudicialComponent novoCaso) throws CasoDuplicadoException {
+    @RequestMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            method = RequestMethod.GET,
+            path = "/{id:[\\d]*}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Optional<CasoJudicial>> getCasoJudicial(@PathVariable Long id) {
+        Optional<CasoJudicial> caso = service.findById(id);
+
+        return ResponseEntity.ok(caso);
+    }
+
+    @RequestMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            method = RequestMethod.POST,
+            path = "/",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CasoJudicial> criarCaso(@RequestBody CasoJudicial novoCaso) throws CasoDuplicadoException {
         if (service.existe(novoCaso)) {
             throw new CasoDuplicadoException("Caso duplicado");
         } else {
-            CasoJudicialComponent caso = service.criarCaso(novoCaso);
+            CasoJudicial caso = service.criarCaso(novoCaso);
 
-            return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(caso);
+            return ResponseEntity
+                    .status(HttpStatusCode.valueOf(201))
+                    .body(caso);
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<CasoJudicialComponent> atualizarCaso(@PathVariable Long id,
-            @RequestBody CasoJudicialComponent casoAtualizado) {
-        CasoJudicialComponent caso = service.atualizarCaso(id, casoAtualizado);
+    @RequestMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            method = RequestMethod.PATCH,
+            path = "/{id:[\\d]*}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Optional<CasoJudicial>> ajustarCaso(@PathVariable Long id,
+            @RequestBody CasoJudicial parcial
+    ) {
+        Optional<CasoJudicial> caso = this.service.atualizarCaso(id, parcial);
 
         return ResponseEntity.ok(caso);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<CasoJudicialComponent> ajustarCaso(@PathVariable Long id,
-            @RequestBody Map<String, Object> atualizacoes) {
-        CasoJudicialComponent caso = service.atualizarCaso(id, atualizacoes);
+    @RequestMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            method = RequestMethod.PUT,
+            path = "/{id:[\\d]*}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CasoJudicial> atualizarCaso(@PathVariable Long id,
+            @RequestBody CasoJudicial casoAtualizado) {
+        CasoJudicial caso = service.substituirCaso(id, casoAtualizado);
 
         return ResponseEntity.ok(caso);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<CasoJudicialComponent> deletarCaso(@PathVariable Long id) {
-        CasoJudicialComponent caso = service.deletarCaso(id);
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            path = "/{id:[\\d]*}")
+    public ResponseEntity<CasoJudicial> deletarCaso(@PathVariable Long id) {
+        service.deletarCaso(id);
 
         return ResponseEntity.noContent().build();
     }

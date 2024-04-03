@@ -37,20 +37,29 @@ public class CasoJudicial {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_caso_judicial")
+    @Column(name = "id_caso_judicial", insertable = false)
     private Long id;
 
-    @Column(name = "nr_numero_unico", nullable = false)
+    @Column(name = "nr_numero_unico")
     private String numeroUnico;
 
-    @Column(name = "cd_decisao", nullable = false)
+    @Column(name = "cd_decisao")
     private String decisao;
 
-    @Column(name = "ds_descricao", nullable = false)
+    @Column(name = "ds_descricao")
     private String descricao;
 
-    @Column(name = "dt_abertura", nullable = false)
+    @Column(name = "dt_abertura", insertable = false, updatable = false)
     private Timestamp dataAbertura;
+    
+    public CasoJudicial() {
+    }
+    
+    public CasoJudicial(String numeroUnico, String decisao, String descricao) {
+        this.numeroUnico = numeroUnico;
+        this.decisao = decisao;
+        this.descricao = descricao;
+    }
 
     @Override
     public String toString() {
@@ -66,5 +75,45 @@ public class CasoJudicial {
                         data,
                         descricao))
                 .toString();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public String getNumeroUnico() {
+        return this.numeroUnico;
+    }
+
+    public void setNumeroUnico(String numeroUnico) {
+        this.numeroUnico = numeroUnico;
+    }
+
+    public String getDecisao() {
+        return decisao;
+    }
+
+    public void setDecisao(String decisao) {
+        this.decisao = decisao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Timestamp getDataAbertura() {
+        return dataAbertura;
+    }
+
+    public void setDataAbertura(Timestamp dataAbertura) {
+        this.dataAbertura = dataAbertura;
     }
 }

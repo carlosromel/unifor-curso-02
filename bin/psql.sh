@@ -1,4 +1,4 @@
 #!/bin/bash
 
-psql --host localhost --dbname pnud --user pnud
+psql --host localhost  --dbname pnud "${1:+--command=$*}"
 
