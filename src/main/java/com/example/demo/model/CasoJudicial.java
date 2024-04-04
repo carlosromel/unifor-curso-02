@@ -35,7 +35,7 @@ import org.hibernate.annotations.CreationTimestamp;
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
 @Entity
-@Table(name = "tb_caso_judicial")
+@Table(schema = "curso2", name = "tb_caso_judicial")
 public class CasoJudicial {
 
     @Id
