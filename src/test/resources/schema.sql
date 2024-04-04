@@ -655,9 +655,6 @@ create table tb_parametro (
   , constraint tb_parametero_id_parametro_pk primary key (id_parametro)
 );
 
-/**
- * Diversas.
- */
 create table tb_assunto (
     id_assunto                      bigserial    not null
   , in_ativo                        boolean      not null default (true)
