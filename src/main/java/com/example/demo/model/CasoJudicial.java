@@ -28,6 +28,8 @@ import jakarta.persistence.TemporalType;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 /**
@@ -36,6 +38,8 @@ import org.hibernate.annotations.CreationTimestamp;
  */
 @Entity
 @Table(schema = "curso2", name = "tb_caso_judicial")
+@NoArgsConstructor
+@Getter
 public class CasoJudicial {
 
     @Id
@@ -56,9 +60,6 @@ public class CasoJudicial {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp dataAbertura;
-    
-    public CasoJudicial() {
-    }
     
     public CasoJudicial(String numeroUnico, String decisao, String descricao) {
         this.numeroUnico = numeroUnico;
@@ -82,18 +83,10 @@ public class CasoJudicial {
                 .toString();
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public CasoJudicial setId(Long id) {
         this.id = id;
 
         return this;
-    }
-    
-    public String getNumeroUnico() {
-        return this.numeroUnico;
     }
 
     public CasoJudicial setNumeroUnico(String numeroUnico) {
@@ -102,18 +95,10 @@ public class CasoJudicial {
         return this;
     }
 
-    public String getDecisao() {
-        return decisao;
-    }
-
     public CasoJudicial setDecisao(String decisao) {
         this.decisao = decisao;
 
         return this;
-    }
-
-    public String getDescricao() {
-        return descricao;
     }
 
     public CasoJudicial setDescricao(String descricao) {
@@ -121,11 +106,6 @@ public class CasoJudicial {
 
         return this;
     }
-
-    public Timestamp getDataAbertura() {
-        return dataAbertura;
-    }
-
     public CasoJudicial setDataAbertura(Timestamp dataAbertura) {
         this.dataAbertura = dataAbertura;
 
