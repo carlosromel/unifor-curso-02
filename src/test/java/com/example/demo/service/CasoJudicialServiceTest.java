@@ -44,9 +44,17 @@ public class CasoJudicialServiceTest {
      * Relacionar o inventário de casos judiciais existentes.
      */
     @BeforeEach
+    private void head() {
+        lista("Casos iniciais");
+    }
+
     @AfterEach
-    private void lista() {
-        System.out.println("--- 8< [ Casos existentes ] --- 8< ---");
+    private void tail() {
+        lista("Casos finais");
+    }
+
+    private void lista(String titulo) {
+        System.out.printf("--- 8< [ %s ] --- 8< ---", titulo);
 
         for (CasoJudicial caso : instance.getTodosOsCasos()) {
             System.out.println(caso);
@@ -101,7 +109,7 @@ public class CasoJudicialServiceTest {
         existente.get()
                 .setNumeroUnico("0000009-09.2024.5.18.0009")
                 .setDecisao("I")
-                .setDescricao("FGTS");
+                .setDescricao("Aposentadoria");
 
         CasoJudicial modificado = instance.substituirCaso(existente.get());
         Optional<CasoJudicial> conferencia = instance.findById(id);
@@ -128,7 +136,7 @@ public class CasoJudicialServiceTest {
          * Modificamos algum atributo.
          */
         existente.get().setDecisao("I");
-        existente.get().setNumeroUnico("0000002-02.2024.5.18.0002");
+        existente.get().setNumeroUnico("0000008-08.2024.5.18.0008");
 
         Optional<CasoJudicial> atualizado = instance.atualizarCaso(id,
                 existente.get());
@@ -156,7 +164,7 @@ public class CasoJudicialServiceTest {
         return instance.criarCaso(new CasoJudicial(
                 "0000001-01.2024.5.18.0001",
                 "A",
-                "FGTS")).getNumeroUnico();
+                "Férias")).getNumeroUnico();
     }
 
     private String criarSegundoCasoJudicial() {
