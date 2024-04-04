@@ -98,11 +98,10 @@ public class CasoJudicialService {
     /**
      * Tratamento do verbo PUT.
      *
-     * @param id
      * @param casoAtualizado
      * @return
      */
-    public CasoJudicial substituirCaso(Long id, CasoJudicial casoAtualizado) {
+    public CasoJudicial substituirCaso(CasoJudicial casoAtualizado) {
         return this.repository.saveAndFlush(casoAtualizado);
     }
 

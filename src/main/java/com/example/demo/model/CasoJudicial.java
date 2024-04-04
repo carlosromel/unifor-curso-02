@@ -23,16 +23,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
+import org.hibernate.annotations.CreationTimestamp;
 
 /**
  *
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
 @Entity
-@Table(schema = "curso2", name = "tb_caso_judicial")
+@Table(name = "tb_caso_judicial")
 public class CasoJudicial {
 
     @Id
@@ -50,6 +53,8 @@ public class CasoJudicial {
     private String descricao;
 
     @Column(name = "dt_abertura", insertable = false, updatable = false)
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp dataAbertura;
     
     public CasoJudicial() {
@@ -81,39 +86,49 @@ public class CasoJudicial {
         return id;
     }
 
-    public void setId(Long id) {
+    public CasoJudicial setId(Long id) {
         this.id = id;
+
+        return this;
     }
     
     public String getNumeroUnico() {
         return this.numeroUnico;
     }
 
-    public void setNumeroUnico(String numeroUnico) {
+    public CasoJudicial setNumeroUnico(String numeroUnico) {
         this.numeroUnico = numeroUnico;
+
+        return this;
     }
 
     public String getDecisao() {
         return decisao;
     }
 
-    public void setDecisao(String decisao) {
+    public CasoJudicial setDecisao(String decisao) {
         this.decisao = decisao;
+
+        return this;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public CasoJudicial setDescricao(String descricao) {
         this.descricao = descricao;
+
+        return this;
     }
 
     public Timestamp getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(Timestamp dataAbertura) {
+    public CasoJudicial setDataAbertura(Timestamp dataAbertura) {
         this.dataAbertura = dataAbertura;
+
+        return this;
     }
 }

@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.example.demo.controller;
+package com.example.demo.controller.api.fila;
 
 import com.example.demo.rabbitproducer.Producer;
 import org.springframework.beans.factory.annotation.Autowired;

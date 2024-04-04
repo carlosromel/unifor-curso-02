@@ -19,7 +19,7 @@
  *
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
-package com.example.demo.controller;
+package com.example.demo.controller.api.arquivos;
 
 import java.io.IOException;
 import java.nio.file.Files;

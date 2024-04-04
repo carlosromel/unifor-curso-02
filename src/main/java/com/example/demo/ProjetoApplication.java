@@ -17,12 +17,12 @@
  */
 package com.example.demo;
 
-import com.example.demo.component.CasoJudicialComponent;
-import com.example.demo.model.CasoJudicial;
-import com.example.demo.service.CasoJudicialService;
+//import com.example.demo.component.CasoJudicialComponent;
+//import com.example.demo.model.CasoJudicial;
+//import com.example.demo.service.CasoJudicialService;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -32,18 +32,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @EnableRabbit
 @SpringBootApplication
-public class ProjetoApplication implements CommandLineRunner {
+public class ProjetoApplication { //implements CommandLineRunner {
 
-    @Autowired
-    private CasoJudicialComponent casoComponent;
+//    @Autowired
+//    private CasoJudicialComponent casoComponent;
 
-    @Autowired
-    private CasoJudicialService servico;
+//    @Autowired
+//    private CasoJudicialService servico;
 
     public static void main(String[] args) {
         SpringApplication.run(ProjetoApplication.class, args);
     }
-
+    /*
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Teste2");
@@ -57,4 +57,5 @@ public class ProjetoApplication implements CommandLineRunner {
 
         System.out.println(this.servico.getCasoByNumeroUnico("x0000003-01.2024.5.18.0001"));
     }
+    */
 }

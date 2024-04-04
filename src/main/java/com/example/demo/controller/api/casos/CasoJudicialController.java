@@ -15,7 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.example.demo.controller;
+package com.example.demo.controller.api.casos;
 
 import com.example.demo.exception.CasoDuplicadoException;
 import com.example.demo.model.CasoJudicial;
@@ -65,7 +65,7 @@ public class CasoJudicialController {
             path = "/",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<CasoJudicial>> getTodosOsCasos() {
-        List<CasoJudicial> casos = service.getTodosOsCasos();
+        List<CasoJudicial> casos = this.service.getTodosOsCasos();
 
         return ResponseEntity.ok(casos);
     }
@@ -76,7 +76,7 @@ public class CasoJudicialController {
             path = "/{id:[\\d]*}",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Optional<CasoJudicial>> getCasoJudicial(@PathVariable Long id) {
-        Optional<CasoJudicial> caso = service.findById(id);
+        Optional<CasoJudicial> caso = this.service.findById(id);
 
         return ResponseEntity.ok(caso);
     }
@@ -87,10 +87,10 @@ public class CasoJudicialController {
             path = "/",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CasoJudicial> criarCaso(@RequestBody CasoJudicial novoCaso) throws CasoDuplicadoException {
-        if (service.existe(novoCaso)) {
+        if (this.service.existe(novoCaso)) {
             throw new CasoDuplicadoException("Caso duplicado");
         } else {
-            CasoJudicial caso = service.criarCaso(novoCaso);
+            CasoJudicial caso = this.service.criarCaso(novoCaso);
 
             return ResponseEntity
                     .status(HttpStatusCode.valueOf(201))
@@ -118,7 +118,7 @@ public class CasoJudicialController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CasoJudicial> atualizarCaso(@PathVariable Long id,
             @RequestBody CasoJudicial casoAtualizado) {
-        CasoJudicial caso = service.substituirCaso(id, casoAtualizado);
+        CasoJudicial caso = this.service.substituirCaso(casoAtualizado);
 
         return ResponseEntity.ok(caso);
     }
@@ -127,7 +127,7 @@ public class CasoJudicialController {
             method = RequestMethod.DELETE,
             path = "/{id:[\\d]*}")
     public ResponseEntity<CasoJudicial> deletarCaso(@PathVariable Long id) {
-        service.deletarCaso(id);
+        this.service.deletarCaso(id);
 
         return ResponseEntity.noContent().build();
     }
