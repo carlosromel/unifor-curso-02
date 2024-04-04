@@ -1,13 +1,13 @@
 /**
  * Processos.
  */
-create table tb_processo_trf (
+create table pje.tb_processo_trf (
     id_processo_trf                 bigserial     not null
 
   , constraint tb_processo_trf_id_processo_trf_pk primary key (id_processo_trf)
 );
 
-create table tb_processo_transicao (
+create table pje.tb_processo_transicao (
     id_transicao                    bigserial     not null
 
   , constraint tb_processo_trf_id_transicao_pk primary key (id_transicao)

@@ -16,8 +16,8 @@ create table pje.tb_variavel_fluxo (
   , id_fluxo                        bigint       not null
 
   , constraint tb_variavel_fluxo_id_variavel_id_fluxo_pk primary key (id_variavel, id_fluxo)
-  , constraint tb_variavel_id_variavel_fk                foreign key (id_variavel) references tb_variavel (id_variavel)
-  , constraint tb_variavel_id_fluxo_fk                   foreign key (id_fluxo)    references tb_fluxo (id_fluxo)
+  , constraint tb_variavel_id_variavel_fk                foreign key (id_variavel) references pje.tb_variavel (id_variavel)
+  , constraint tb_variavel_id_fluxo_fk                   foreign key (id_fluxo)    references pje.tb_fluxo (id_fluxo)
 );
 
 create table pje.tb_variavel_tipo_modelo (
