@@ -11,5 +11,5 @@ curl --silent --header 'Content-Type: application/json' ${URL}/BR  | jq
 echo "Pais por sigla"
 curl --silent --header 'Content-Type: application/json' ${URL}/BRA | jq
 
-echo "Todos os paises"
+echo "Todos os países"
 curl --silent --header 'Content-Type: application/json' ${URL}/    | jq
