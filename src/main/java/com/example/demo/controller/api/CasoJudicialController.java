@@ -23,7 +23,7 @@ import com.example.demo.service.CasoJudicialService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,7 +56,9 @@ public class CasoJudicialController {
     public ResponseEntity<Optional<CasoJudicial>> getCasoJudicial(@PathVariable("numeroUnico") String numeroUnico) {
         Optional<CasoJudicial> caso = this.service.getCasoByNumeroUnico(numeroUnico);
 
-        return ResponseEntity.ok(caso);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(caso);
     }
 
     @RequestMapping(
@@ -67,7 +69,9 @@ public class CasoJudicialController {
     public ResponseEntity<List<CasoJudicial>> getTodosOsCasos() {
         List<CasoJudicial> casos = this.service.getTodosOsCasos();
 
-        return ResponseEntity.ok(casos);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(casos);
     }
 
     @RequestMapping(
@@ -78,7 +82,9 @@ public class CasoJudicialController {
     public ResponseEntity<Optional<CasoJudicial>> getCasoJudicial(@PathVariable Long id) {
         Optional<CasoJudicial> caso = this.service.findById(id);
 
-        return ResponseEntity.ok(caso);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(caso);
     }
 
     @RequestMapping(
@@ -93,7 +99,7 @@ public class CasoJudicialController {
             CasoJudicial caso = this.service.criarCaso(novoCaso);
 
             return ResponseEntity
-                    .status(HttpStatusCode.valueOf(201))
+                    .status(HttpStatus.CREATED)
                     .body(caso);
         }
     }
@@ -108,7 +114,9 @@ public class CasoJudicialController {
     ) {
         Optional<CasoJudicial> caso = this.service.atualizarCaso(id, parcial);
 
-        return ResponseEntity.ok(caso);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(caso);
     }
 
     @RequestMapping(
@@ -120,7 +128,9 @@ public class CasoJudicialController {
             @RequestBody CasoJudicial casoAtualizado) {
         CasoJudicial caso = this.service.substituirCaso(casoAtualizado);
 
-        return ResponseEntity.ok(caso);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(caso);
     }
 
     @RequestMapping(
@@ -129,6 +139,8 @@ public class CasoJudicialController {
     public ResponseEntity<CasoJudicial> deletarCaso(@PathVariable Long id) {
         this.service.deletarCaso(id);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 }
