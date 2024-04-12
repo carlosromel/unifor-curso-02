@@ -39,4 +39,7 @@ public interface IEstadoRepository extends JpaRepository<Estado, Long> {
     @Override
     @Query("select e from Estado e where e.ativo")
     public List<Estado> findAll();
+
+    @Query("select e from Estado e where e.ativo and e.pais.sigla = :sigla and e.uf = :uf")
+    public Optional<Estado> findBySiglaUF(String sigla, String uf);
 }

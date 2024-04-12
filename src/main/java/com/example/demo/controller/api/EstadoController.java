@@ -18,7 +18,6 @@
 package com.example.demo.controller.api;
 
 import com.example.demo.model.Estado;
-import com.example.demo.model.Pais;
 import com.example.demo.service.EstadoService;
 import java.util.List;
 import java.util.Optional;
@@ -46,41 +45,33 @@ public class EstadoController {
         this.service = service;
     }
 
-    /**
-     *
-     * @param sigla
-     * @return
-     */
     @RequestMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            method = RequestMethod.GET,
-            path = "/{sigla:\\w{3}}",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Optional<Estado>>> findEstadosPorSiglaPais(@PathVariable("sigla") String sigla) {
-        List<Optional<Estado>> pais = this.service.findBySiglaPais(sigla);
-
-        return ResponseEntity.ok(pais);
-    }
-
-    @RequestMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            method = RequestMethod.GET,
-            path = "/{uf:\\w{2}}",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Optional<Estado>> findPaisPorCodigoISO(@PathVariable("uf") String uf) {
-        Optional<Estado> pais = this.service.findByUF(uf);
-
-        return ResponseEntity.ok(pais);
-    }
-
-    @RequestMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.GET,
             path = "/",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Estado>> findTodos() {
-        List<Estado> caso = this.service.findAll();
+        List<Estado> estado = this.service.findAll();
 
-        return ResponseEntity.ok(caso);
+        return ResponseEntity.ok(estado);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "/{sigla:\\w{3}}/",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Optional<Estado>>> findEstadosPorSiglaPais(@PathVariable("sigla") String sigla) {
+        List<Optional<Estado>> estado = this.service.findBySiglaPais(sigla);
+
+        return ResponseEntity.ok(estado);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "/{sigla:\\w{3}}/{uf:\\w{2}}/",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Optional<Estado>> findPaisPorCodigoISO(@PathVariable("sigla") String sigla, @PathVariable("uf") String uf) {
+        Optional<Estado> estado = this.service.findByUF(sigla, uf);
+
+        return ResponseEntity.ok(estado);
     }
 }

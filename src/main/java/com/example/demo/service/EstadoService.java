@@ -49,4 +49,8 @@ public class EstadoService {
     public List<Estado> findAll() {
         return this.repository.findAll();
     }
+
+    public Optional<Estado> findByUF(String sigla, String uf) {
+        return this.repository.findBySiglaUF(sigla, uf);
+    }
 }

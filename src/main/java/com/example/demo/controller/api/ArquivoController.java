@@ -38,20 +38,19 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/api/arquivos")
 public class ArquivoController {
-
+ 
     private static final String DIR_UPLOAD = "uploads/";
     private static final String DIR_DOWNLOAD = "downloads/";
 
-    @PostMapping("/upload")
-    public ResponseEntity<String> uploadArquivo(@RequestParam("file") MultipartFile file) {
+    @PostMapping("/upload/")
+    public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
-            return new ResponseEntity<>(
-                    "Selecione um arquivo para fazer upload",
+            return new ResponseEntity<>("Selecione um arquivo para fazer upload",
                     HttpStatus.BAD_REQUEST);
         } else {
             try {
                 byte[] bytes = file.getBytes();
-                Path path = Paths.get(DIR_UPLOAD + file.getOriginalFilename());
+                Path path = Paths.get(DIR_UPLOAD, file.getOriginalFilename());
                 Files.write(path, bytes);
                 return new ResponseEntity<>("Arquivo carregado com sucesso!",
                         HttpStatus.OK);
@@ -63,14 +62,14 @@ public class ArquivoController {
     }
 
     @GetMapping("/download/{filename}")
-    public ResponseEntity<byte[]> downloadFile(@PathVariable("filename") String filename) {
+    public ResponseEntity<byte[]> download(@PathVariable("filename") String filename) {
         String header = String.format("Content-Disposition",
                 "attachment; filename='%s'", filename);
 
         try {
-            Path filePath = Paths.get(DIR_DOWNLOAD + filename);
+            Path filePath = Paths.get(DIR_DOWNLOAD, filename);
             byte[] fileBytes = Files.readAllBytes(filePath);
-
+ 
             return ResponseEntity
                     .ok()
                     .header(header)

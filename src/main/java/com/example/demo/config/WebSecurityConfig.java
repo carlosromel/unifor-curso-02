@@ -17,48 +17,64 @@
  */
 package com.example.demo.config;
 
-import org.springframework.context.annotation.Configuration;
-/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-*/
+
 /**
  *
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
 @Configuration
-//@EnableWebSecurity
+@EnableWebSecurity
 public class WebSecurityConfig {
 
-    /*
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("romel").roles("USER").password("123")
+                .withUser("romel").roles("USER").password("{noop}123")
                 .and()
-                .withUser("admin").roles("ADMIN").password("123");
+                .withUser("admin").roles("ADMIN").password("{noop}123");
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests(request -> request.
-                requestMatchers(new AntPathRequestMatcher("/api/casos/**"))
-                .hasRole("USER"))
-                .authorizeHttpRequests(request -> request.requestMatchers(new AntPathRequestMatcher("/api/arquivos/**"))
+        return http.authorizeHttpRequests(request -> request.requestMatchers(
+                new AntPathRequestMatcher("/api/arquivos/**"),
+                new AntPathRequestMatcher("/api/casos/**"),
+                new AntPathRequestMatcher("/api/pais/**"),
+                new AntPathRequestMatcher("/api/estado/**"))
+                .hasRole("USER")
+        //                .anyRequest()
+        //                .permitAll()
+        )
+                .httpBasic(Customizer.withDefaults())
+                .csrf((csrf) -> csrf.disable())
+                .authorizeHttpRequests(request -> request.requestMatchers(
+                new AntPathRequestMatcher("/api/arquivos/**"),
+                new AntPathRequestMatcher("/api/casos/**"),
+                new AntPathRequestMatcher("/api/pais/**"),
+                new AntPathRequestMatcher("/api/estado/**"))
                 .hasRole("ADMIN")
-                .anyRequest().authenticated()).httpBasic(Customizer.withDefaults())
+                //                .anyRequest()
+                //                .permitAll()
+                )
+                .httpBasic(Customizer.withDefaults())
+                .csrf((csrf) -> csrf.disable())
                 .build();
     }
-    */
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
 }

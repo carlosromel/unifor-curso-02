@@ -49,20 +49,6 @@ public class CasoJudicialController {
     }
 
     @RequestMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            method = RequestMethod.GET,
-            path = "/{numeroUnico:[\\d.-]{25}}",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Optional<CasoJudicial>> getCasoJudicial(@PathVariable("numeroUnico") String numeroUnico) {
-        Optional<CasoJudicial> caso = this.service.getCasoByNumeroUnico(numeroUnico);
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(caso);
-    }
-
-    @RequestMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.GET,
             path = "/",
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -75,9 +61,20 @@ public class CasoJudicialController {
     }
 
     @RequestMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.GET,
-            path = "/{id:[\\d]*}",
+            path = "/{numeroUnico:[\\d.-]{25}}/",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Optional<CasoJudicial>> getCasoJudicial(@PathVariable("numeroUnico") String numeroUnico) {
+        Optional<CasoJudicial> caso = this.service.getCasoByNumeroUnico(numeroUnico);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(caso);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "/{id:[\\d]*}/",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Optional<CasoJudicial>> getCasoJudicial(@PathVariable Long id) {
         Optional<CasoJudicial> caso = this.service.findById(id);
@@ -120,7 +117,6 @@ public class CasoJudicialController {
     }
 
     @RequestMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.PUT,
             path = "/{id:[\\d]*}",
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -135,7 +131,7 @@ public class CasoJudicialController {
 
     @RequestMapping(
             method = RequestMethod.DELETE,
-            path = "/{id:[\\d]*}")
+            path = "/{id:[\\d]*}/")
     public ResponseEntity<CasoJudicial> deletarCaso(@PathVariable Long id) {
         this.service.deletarCaso(id);
 

@@ -46,20 +46,28 @@ public class PaisController {
     }
 
     @RequestMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.GET,
-            path = "/{codigo:\\w{2}}",
+            path = "/",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Optional<Pais>> findPaisPorCodigo(@PathVariable("codigo") String codigo) {
-        Optional<Pais> pais = this.service.findByCodigo(codigo);
+    public ResponseEntity<List<Pais>> findTodos() {
+        List<Pais> pais = this.service.findAll();
 
         return ResponseEntity.ok(pais);
     }
 
     @RequestMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.GET,
-            path = "/{codigoISO:\\d{3}}",
+            path = "/{codigo:\\w{2}}/",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Optional<Pais>> findPaisPorCodigo(@PathVariable("codigo") String codigo) {
+        Optional<Pais> pais = this.service.findByCodigo(codigo);
+  
+        return ResponseEntity.ok(pais);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "/{codigoISO:\\d{3}}/",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Optional<Pais>> findPaisPorCodigoISO(@PathVariable("codigoISO") String codigoISO) {
         Optional<Pais> pais = this.service.findByCodgioISO(codigoISO);
@@ -68,24 +76,12 @@ public class PaisController {
     }
 
     @RequestMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.GET,
-            path = "/{sigla:[a-zA-Z]{3}}",
+            path = "/{sigla:[a-zA-Z]{3}}/",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Optional<Pais>> findPaisPorSigla(@PathVariable String sigla) {
-        Optional<Pais> caso = this.service.findBySigla(sigla);
+        Optional<Pais> pais = this.service.findBySigla(sigla);
 
-        return ResponseEntity.ok(caso);
-    }
-
-    @RequestMapping(
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            method = RequestMethod.GET,
-            path = "/",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Pais>> findTodos() {
-        List<Pais> caso = this.service.findAll();
-
-        return ResponseEntity.ok(caso);
+        return ResponseEntity.ok(pais);
     }
 }
