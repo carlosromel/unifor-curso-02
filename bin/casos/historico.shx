@@ -1,7 +1,3 @@
-#!/bin/bash
-
-URL="http://localhost:8081/api/casos"
-PROCESSO="0000022-12.1972.5.18.0001"
 
 function get() {
     ID=$1
@@ -17,21 +13,8 @@ function get() {
     echo "ID: [${ID}]"
 }
 
-read -d '' VERB_POST <<HERE
-{
-  "numeroUnico":  "${PROCESSO}"
-, "decisao":      "C"
-, "descricao":    "FGTS"
-}
-HERE
-
 echo "Criando um objeto (POST)..."
-ID=$(curl --silent \
-          --request POST \
-          --header  "Content-Type: application/json" \
-          --user    "romel:123" \
-          --data    "${VERB_POST}" \
-          ${URL}/ | jq ".id")
+ID=$()
 echo "Objeto criado: ${ID}"
 get ${ID}
 
@@ -67,15 +50,6 @@ curl --silent \
      --user    "romel:123" \
      --data    "${VERB_PUT}" \
      ${URL}/${ID} | jq
-
-get ${ID}
-
-echo "Removendo o objeto recém criado (DELETE)... #${ID}"
-curl --silent \
-     --request DELETE \
-     --header  "Content-Type: application/json" \
-     --user    "romel:123" \
-     ${URL}/${ID}
 
 get ${ID}
 

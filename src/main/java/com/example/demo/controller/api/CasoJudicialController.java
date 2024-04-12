@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/casos")
-public class CasoJudicialController {
+public class CasoJudicialController implements IAPIController {
 
     @Autowired
     private final CasoJudicialService service;
@@ -52,7 +52,8 @@ public class CasoJudicialController {
             method = RequestMethod.GET,
             path = "/",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CasoJudicial>> getTodosOsCasos() {
+    @Override
+    public ResponseEntity<List<CasoJudicial>> getAll() {
         List<CasoJudicial> casos = this.service.getTodosOsCasos();
 
         return ResponseEntity
@@ -64,7 +65,7 @@ public class CasoJudicialController {
             method = RequestMethod.GET,
             path = "/{numeroUnico:[\\d.-]{25}}/",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Optional<CasoJudicial>> getCasoJudicial(@PathVariable("numeroUnico") String numeroUnico) {
+    public ResponseEntity<Optional<CasoJudicial>> getByNumeroUnico(@PathVariable("numeroUnico") String numeroUnico) {
         Optional<CasoJudicial> caso = this.service.getCasoByNumeroUnico(numeroUnico);
 
         return ResponseEntity
@@ -76,7 +77,8 @@ public class CasoJudicialController {
             method = RequestMethod.GET,
             path = "/{id:[\\d]*}/",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Optional<CasoJudicial>> getCasoJudicial(@PathVariable Long id) {
+    @Override
+    public ResponseEntity<Optional<CasoJudicial>> get(@PathVariable Long id) {
         Optional<CasoJudicial> caso = this.service.findById(id);
 
         return ResponseEntity
@@ -89,7 +91,8 @@ public class CasoJudicialController {
             method = RequestMethod.POST,
             path = "/",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CasoJudicial> criarCaso(@RequestBody CasoJudicial novoCaso) throws CasoDuplicadoException {
+    @Override
+    public ResponseEntity<CasoJudicial> post(@RequestBody CasoJudicial novoCaso) throws CasoDuplicadoException {
         if (this.service.existe(novoCaso)) {
             throw new CasoDuplicadoException("Caso duplicado");
         } else {
@@ -104,9 +107,10 @@ public class CasoJudicialController {
     @RequestMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             method = RequestMethod.PATCH,
-            path = "/{id:[\\d]*}",
+            path = "/{id:[\\d]*}/",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Optional<CasoJudicial>> ajustarCaso(@PathVariable Long id,
+    @Override
+    public ResponseEntity<Optional<CasoJudicial>> patch(@PathVariable Long id,
             @RequestBody CasoJudicial parcial
     ) {
         Optional<CasoJudicial> caso = this.service.atualizarCaso(id, parcial);
@@ -118,9 +122,10 @@ public class CasoJudicialController {
 
     @RequestMapping(
             method = RequestMethod.PUT,
-            path = "/{id:[\\d]*}",
+            path = "/{id:[\\d]*}/",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CasoJudicial> atualizarCaso(@PathVariable Long id,
+    @Override
+    public ResponseEntity<CasoJudicial> put(@PathVariable Long id,
             @RequestBody CasoJudicial casoAtualizado) {
         CasoJudicial caso = this.service.substituirCaso(casoAtualizado);
 
@@ -132,7 +137,8 @@ public class CasoJudicialController {
     @RequestMapping(
             method = RequestMethod.DELETE,
             path = "/{id:[\\d]*}/")
-    public ResponseEntity<CasoJudicial> deletarCaso(@PathVariable Long id) {
+    @Override
+    public ResponseEntity<CasoJudicial> delete(@PathVariable Long id) {
         this.service.deletarCaso(id);
 
         return ResponseEntity

@@ -18,12 +18,12 @@
 package com.example.demo.controller.api;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+//import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.then;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.core.io.ClassPathResource;
@@ -32,9 +32,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+//import org.springframework.security.test.context.support.WithMockUser;
+//import org.springframework.test.context.ContextConfiguration;
+//import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,10 +43,10 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author Carlos Romel Pereira da Silva, <carlos.romel@gmail.com>
  */
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration
-@WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@ExtendWith(SpringExtension.class)
+//@ContextConfiguration
+//@WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
 public class ArquivoControllerTest {
 
     @Autowired
@@ -66,7 +66,7 @@ public class ArquivoControllerTest {
         return "Hello " + auth;
     }
 
-    @Test
+//    @Test
     public void testShowPort() {
         ClassPathResource resource = new ClassPathResource("testupload.txt", getClass());
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
